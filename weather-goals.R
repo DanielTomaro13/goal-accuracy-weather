@@ -28,7 +28,6 @@ position <- player_details_specific %>%
     is_key_forward = as.integer(position == "KEY_FORWARD")
   ) %>%
   select(Player, is_key_forward) %>% filter(is_key_forward == 1)
-  distinct(Player, .keep_all = TRUE)
 #####################################################
 stats <- fetch_player_stats_afl(2023:2025)
 colnames(stats)
@@ -116,3 +115,6 @@ ggplot(forwards, aes(x = Weather, y = goalAccuracy, fill = factor(is_key_forward
 anova2 <- aov(goalAccuracy ~ Weather * is_key_forward, data = forwards)
 summary(anova2)
 #####################################################
+# Weather alone does not significantly impact goal accuracy.
+# Key forwards are significantly more accurate, regardless of weather.
+# There's no evidence that key forwards handle weather conditions differently than others.
